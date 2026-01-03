@@ -1,26 +1,15 @@
 import socket
 
-localIP = "0.0.0.0"
-localPort = 20001
-bufferSize = 1024
+group = '224.1.1.1'
+port = 5004
 
-msgFromServer = "Hello World\n"
+# 2-hop restriction in network
+ttl = 2
+sock = socket.socket(socket.AF_INET,
+                     socket.SOCK_DGRAM,
+                     socket.IPPROTO_UDP)
+sock.setsockopt(socket.IPPROTO_IP,
+                socket.IP_MULTICAST_TTL,
+                ttl)
 
-bytesToSend = str.encode(msgFromServer)
-UDPServerSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-
-UDPServerSocket.bind((localIP, localPort))
-
-print("UDP Server Up and Listening")
-
-while(True):
-    bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-    message = bytesAddressPair[0]
-    address = bytesAddressPair[1]
-    
-    clientMsg = "Message from client: {}".format(message.decode())
-    clientIP = "Client IP Address: {}".format(address)
-    
-    print(clientMsg)
-    print(clientIP)
-
+sock.sendto(b"hello world", (group, port))
