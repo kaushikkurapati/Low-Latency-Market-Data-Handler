@@ -12,4 +12,5 @@ sock.setsockopt(socket.IPPROTO_IP,
                 socket.IP_MULTICAST_TTL,
                 ttl)
 
-sock.sendto(b"hello world", (group, port))
+for i in range(1, 10):
+    sock.sendto(b"hello world", (group, port))
