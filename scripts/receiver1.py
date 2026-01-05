@@ -38,5 +38,5 @@ try:
             except struct.error as e:
                 print(f"Error unpacking data: {e}")
 except:
-    print("\nReceiver 3 Stopped")
+    print("\nReceiver 1 Stopped")
     sock.close()
