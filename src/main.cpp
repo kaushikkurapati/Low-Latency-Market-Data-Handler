@@ -10,3 +10,7 @@
     #include <arpa/inet.h>
     #include <unistd.h>
 #endif
+
+int main(int argc) {
+    printf("Hello World");
+}
